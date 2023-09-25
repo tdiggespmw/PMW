@@ -65,18 +65,7 @@ Public Class WebForm2
 
             branch.Enabled = False
 
-            ' Load States...
-            strSQL = "SELECT stateid, statename FROM stateT ORDER BY statename"
-            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-            If ds Is Nothing Then
-            ElseIf ds.Tables.Count = 0 Then
-            ElseIf ds.Tables(0).Rows.Count = 0 Then
-            Else
-                shipstate.DataValueField = "stateid"
-                shipstate.DataTextField = "statename"
-                shipstate.DataSource = ds
-                shipstate.DataBind()
-            End If
+
 
 
         End If
@@ -173,35 +162,31 @@ Public Class WebForm2
             branch.DataSource = dsc
             branch.DataBind()
 
-            strSQL = "SELECT * FROM companyT where companyid=" + company.SelectedValue
-            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-
-            With ds.Tables(0).Rows(0)
-                iscustomer.Checked = .Item("iscustomer")
-                isvendor.Checked = .Item("isvendor")
-                ismaincompany.Checked = .Item("isprimary")
-            End With
-
-            With dsc.Tables(0).Rows(0)
-                shipaddressline1.Text = .Item("shippingaddressline1").ToString()
-                billaddressline.Text = .Item("billingaddressline1").ToString()
-                shipaddressline2.Text = .Item("shippingaddressline2").ToString()
-                billaddressline2.Text = .Item("billingaddressline2").ToString()
-                shipcity.Text = .Item("shippingcity").ToString()
-                billcity.Text = .Item("billingcity").ToString()
-                ' shipstate.Text = .Item("shippingstate").ToString()
-                'billstate.Text = .Item("billingstate").ToString()
-                shipzip.Text = .Item("shippingzipcode").ToString()
-                billzip.Text = .Item("billingzipcode").ToString()
-                'shipcountry.Text = .Item("shippingcountry").ToString()
-                'billcountry.Text = .Item("billingcountry").ToString()
-            End With
-
-
-
-
         End If
 
+        strSQL = "SELECT * FROM companyT where companyid=" + company.SelectedValue
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+
+        With ds.Tables(0).Rows(0)
+            iscustomer.Checked = .Item("iscustomer")
+            isvendor.Checked = .Item("isvendor")
+            ismaincompany.Checked = .Item("isprimary")
+        End With
+
+        With dsc.Tables(0).Rows(0)
+            shipaddressline1.Text = .Item("shippingaddressline1").ToString()
+            billaddressline.Text = .Item("billingaddressline1").ToString()
+            shipaddressline2.Text = .Item("shippingaddressline2").ToString()
+            billaddressline2.Text = .Item("billingaddressline2").ToString()
+            shipcity.Text = .Item("shippingcity").ToString()
+            billcity.Text = .Item("billingcity").ToString()
+            ' shipstate.Text = .Item("shippingstate").ToString()
+            'billstate.Text = .Item("billingstate").ToString()
+            shipzip.Text = .Item("shippingzipcode").ToString()
+            billzip.Text = .Item("billingzipcode").ToString()
+            'shipcountry.Text = .Item("shippingcountry").ToString()
+            'billcountry.Text = .Item("billingcountry").ToString()
+        End With
 
 
         'strSQL = "SELECT * FROM companyT where companyid=" + company.SelectedValue
@@ -272,7 +257,7 @@ Public Class WebForm2
 
     Protected Sub btnsavecompany_Click(sender As Object, e As EventArgs)
 
-        strSQL = "INSERT INTO companyT (companyname) VALUES ('" + companyname.Text + "')"
+        strSQL = "INSERT INTO companyT (companyname,isprimary,iscustomer,isvendor) VALUES ('" + companyname.Text + "','" + ismaincompany.Checked.ToString() + "','" + iscustomer.Checked.ToString() + "','" + isvendor.Checked.ToString() + "')"
         SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
         lblname.Visible = False
         companyname.Visible = False
@@ -369,5 +354,63 @@ Public Class WebForm2
 
     Protected Sub continuebutton1_Click(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Protected Sub shipstate_PreRender(sender As Object, e As EventArgs)
+        ' Load States...
+        strSQL = "SELECT stateid, statename FROM stateT ORDER BY statename"
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+        If ds Is Nothing Then
+        ElseIf ds.Tables.Count = 0 Then
+        ElseIf ds.Tables(0).Rows.Count = 0 Then
+        Else
+            shipstate.DataValueField = "stateid"
+            shipstate.DataTextField = "statename"
+            shipstate.DataSource = ds
+            shipstate.DataBind()
+        End If
+    End Sub
+
+    Protected Sub billstate_PreRender(sender As Object, e As EventArgs)
+        ' Load States...
+        strSQL = "SELECT stateid, statename FROM stateT ORDER BY statename"
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+        If ds Is Nothing Then
+        ElseIf ds.Tables.Count = 0 Then
+        ElseIf ds.Tables(0).Rows.Count = 0 Then
+        Else
+            billstate.DataValueField = "stateid"
+            billstate.DataTextField = "statename"
+            billstate.DataSource = ds
+            billstate.DataBind()
+        End If
+    End Sub
+
+    Protected Sub ddbillcountry_PreRender(sender As Object, e As EventArgs)
+        strSQL = "SELECT countryid, countryname FROM countryT ORDER BY countryname"
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+        If ds Is Nothing Then
+        ElseIf ds.Tables.Count = 0 Then
+        ElseIf ds.Tables(0).Rows.Count = 0 Then
+        Else
+            ddbillcountry.DataValueField = "countryid"
+            ddbillcountry.DataTextField = "countryname"
+            ddbillcountry.DataSource = ds
+            ddbillcountry.DataBind()
+        End If
+    End Sub
+
+    Protected Sub ddshipcountry_PreRender(sender As Object, e As EventArgs)
+        strSQL = "SELECT countryid, countryname FROM countryT ORDER BY countryname"
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+        If ds Is Nothing Then
+        ElseIf ds.Tables.Count = 0 Then
+        ElseIf ds.Tables(0).Rows.Count = 0 Then
+        Else
+            ddshipcountry.DataValueField = "countryid"
+            ddshipcountry.DataTextField = "countryname"
+            ddshipcountry.DataSource = ds
+            ddshipcountry.DataBind()
+        End If
     End Sub
 End Class

@@ -299,7 +299,7 @@ hr.new5 {
                 <asp:Label CssClass="labels" ID="Label4" runat="server" Text="State  " ></asp:Label>
                </asp:TableCell >
               <asp:TableCell>
-                 <asp:DropDownList ID="shipstate" runat="server" AutoPostBack="True"  >
+                 <asp:DropDownList ID="shipstate" runat="server" OnPreRender="shipstate_PreRender" AutoPostBack="True"  >
                   <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                 </asp:DropDownList>
                   </asp:TableCell >
@@ -308,7 +308,7 @@ hr.new5 {
                       <asp:Label CssClass="labels" ID="Label5" runat="server" Text="State  " ></asp:Label>
                </asp:TableCell>
               <asp:TableCell>
-                 <asp:DropDownList ID="billstate" runat="server" AutoPostBack="True"  >
+                 <asp:DropDownList ID="billstate" OnPreRender="billstate_PreRender" runat="server" AutoPostBack="True"  >
                   <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                 </asp:DropDownList>
                   </asp:TableCell >
@@ -349,7 +349,7 @@ hr.new5 {
 
 
                <asp:TableCell >
-                <asp:TextBox ID="shipcountry" runat="server" > </asp:TextBox>
+               <asp:DropDownList ID="ddshipcountry" runat="server" OnPreRender="ddshipcountry_PreRender"></asp:DropDownList>
                </asp:TableCell>
             
 
@@ -359,7 +359,7 @@ hr.new5 {
 
 
                <asp:TableCell >
-                <asp:TextBox ID="billcountry" runat="server" > </asp:TextBox>
+                <asp:DropDownList ID="ddbillcountry" runat="server" OnPreRender="ddbillcountry_PreRender"></asp:DropDownList>
                </asp:TableCell>
 
          </asp:TableRow>
@@ -380,7 +380,7 @@ hr.new5 {
          <asp:TableRow>
              <asp:TableCell></asp:TableCell>
              <asp:TableCell>
-                 <asp:Button runat="server" ID="continuebutton1" Text="Save" OnClick="continuebutton1_Click" />
+                 <asp:Button runat="server" ID="continuebutton1" Text="Continue >>" OnClick="continuebutton1_Click" />
              </asp:TableCell>
              <asp:TableCell></asp:TableCell>
          </asp:TableRow>
@@ -828,7 +828,7 @@ hr.new5 {
         </tr>
         <tr>
             <td>
-                <asp:Button ID="btnSave" runat="server" Text="Save" />
+               <%-- <asp:Button ID="btnSave" runat="server" Text="Save" />--%>
             </td>
         </tr>
     </table>

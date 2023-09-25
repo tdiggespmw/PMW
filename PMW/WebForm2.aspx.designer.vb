@@ -437,13 +437,13 @@ Partial Public Class WebForm2
     Protected WithEvents Label11 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''shipcountry control.
+    '''ddshipcountry control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents shipcountry As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents ddshipcountry As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Label12 control.
@@ -455,13 +455,13 @@ Partial Public Class WebForm2
     Protected WithEvents Label12 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''billcountry control.
+    '''ddbillcountry control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents billcountry As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents ddbillcountry As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''continuebutton1 control.
@@ -1083,13 +1083,4 @@ Partial Public Class WebForm2
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents password As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''btnSave control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.Button
 End Class
