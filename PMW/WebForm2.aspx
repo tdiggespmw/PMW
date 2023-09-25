@@ -115,15 +115,17 @@ hr.new5 {
                </asp:TableCell >
 
                <asp:TableCell >
+                     <asp:Button runat="server" ID="addnewcompany" Text="+" OnClick="addnewcompany_Click"   />&nbsp;&nbsp;&nbsp;
                  <asp:DropDownList ID="company" runat="server" AutoPostBack="True"  OnSelectedIndexChanged="CompanyOnSelectedIndexchange" >
                   <asp:ListItem Text="--Select--" Value="0" ></asp:ListItem>
                  </asp:DropDownList>
+                   
                </asp:TableCell>
             <asp:TableCell>
-                    <asp:Button runat="server" ID="addnewcompany" Text="Add New Company" OnClick="addnewcompany_Click"   />
+                  
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:Button runat="server" ID="editselectedcompany" Text="Edit Selected Company" OnClick="editselectedcompany_Click"   />
+                  <%--  <asp:Button runat="server" ID="editselectedcompany" Text="Edit Selected Company" OnClick="editselectedcompany_Click"   />--%>
                 </asp:TableCell>
       </asp:TableRow>
      <asp:TableRow>
@@ -189,15 +191,18 @@ hr.new5 {
                   </asp:TableCell >
 
                <asp:TableCell >  
+                    <asp:Button runat="server"  ID="addnewbranch" text="+" OnClick="addnewbranch_Click" />&nbsp;&nbsp;&nbsp;
                  <asp:DropDownList ID="branch" runat="server"  OnSelectedIndexChanged ="branch_SelectedIndexChanged"  >
+                    
                   <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                 </asp:DropDownList>
+                      
                 </asp:TableCell >
                 <asp:TableCell>
-                    <asp:Button runat="server"  ID="addnewbranch" text="Add New Branch" OnClick="addnewbranch_Click" />
+                
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:Button runat="server" ID="editselectedbranch" Text="Edit Selected Branch" OnClick="editselectedbranch_Click" />
+                  <%--  <asp:Button runat="server" ID="editselectedbranch" Text="Edit Selected Branch" OnClick="editselectedbranch_Click" />--%>
                 </asp:TableCell>
 </asp:TableRow>
            <asp:TableRow>

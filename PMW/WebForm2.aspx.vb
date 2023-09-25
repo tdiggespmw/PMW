@@ -62,6 +62,7 @@ Public Class WebForm2
             branch.Items.Insert(0, newItem2)
 
 
+
             branch.Enabled = False
 
             ' Load States...
@@ -239,7 +240,7 @@ Public Class WebForm2
         btnsavebranch.Visible = True
         btncancelbranch.Visible = True
 
-        branch.SelectedValue = 0
+        ' branch.SelectedValue = 0
 
     End Sub
 
@@ -286,7 +287,7 @@ Public Class WebForm2
         ElseIf ds.Tables(0).Rows.Count = 0 Then
         Else
             company.DataValueField = "companyid"
-            company.Items.FindByText(companyname.Text.Trim).Selected = True
+            'company.Items.FindByText(companyname.Text.Trim).Selected = True
             company.DataTextField = "companyname"
             company.DataSource = ds
             company.DataBind()
@@ -337,7 +338,7 @@ Public Class WebForm2
     End Sub
 
     Protected Sub btnsavebranch_Click(sender As Object, e As EventArgs)
-        strSQL = "INSERT INTO branchT (branchname) VALUES ('" + branchname.Text + "')"
+        strSQL = "INSERT INTO branchT (branchname,companyid) VALUES ('" + branchname.Text + "'," + company.SelectedValue + ")"
         SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
         lblbranchname.Visible = False
         branchname.Visible = False

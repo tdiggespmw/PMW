@@ -104,15 +104,6 @@ Partial Public Class WebForm2
     Protected WithEvents Label44 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''company control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents company As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
     '''addnewcompany control.
     '''</summary>
     '''<remarks>
@@ -122,13 +113,13 @@ Partial Public Class WebForm2
     Protected WithEvents addnewcompany As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''editselectedcompany control.
+    '''company control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents editselectedcompany As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents company As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''ismaincompany control.
@@ -203,15 +194,6 @@ Partial Public Class WebForm2
     Protected WithEvents Label45 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''branch control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents branch As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
     '''addnewbranch control.
     '''</summary>
     '''<remarks>
@@ -221,13 +203,13 @@ Partial Public Class WebForm2
     Protected WithEvents addnewbranch As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''editselectedbranch control.
+    '''branch control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents editselectedbranch As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents branch As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''lblbranchname control.
