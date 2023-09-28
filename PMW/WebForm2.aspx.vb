@@ -1,9 +1,14 @@
 ﻿Imports System
+Imports System.ComponentModel
+Imports System.ComponentModel.Design.Serialization
 Imports System.Data.SqlClient
 Imports System.Net
+Imports System.Reflection
 Imports System.Web.UI
 Imports System.Web.UI.WebControls
+Imports DevExpress.ReportServer.ServiceModel.DataContracts
 Imports DevExpress.XtraPrinting.Export.Pdf
+Imports DevExpress.XtraSpellChecker.Parser
 
 
 Public Class WebForm2
@@ -22,7 +27,7 @@ Public Class WebForm2
             Tab1.CssClass = "Clicked"
             MainView.ActiveViewIndex = 0
 
-            'Tab2.Visible = False
+            Tab2.Visible = False
             Tab3.Visible = False
             Tab4.Visible = False
             Tab5.Visible = False
@@ -90,7 +95,7 @@ Public Class WebForm2
         Tab4.CssClass = "Initial"
         Tab5.CssClass = "Initial"
         Tab6.CssClass = "Initial"
-        MainView.ActiveViewIndex = 1
+        MainView.ActiveViewIndex = 2
     End Sub
 
     Protected Sub Tab3_Click(ByVal sender As Object, ByVal e As EventArgs)
@@ -174,18 +179,27 @@ Public Class WebForm2
         End With
 
         With dsc.Tables(0).Rows(0)
+
+            branchphone.Text = .Item("branchphone").ToString()
+            branchmainemail.Text = .Item("primaryemail").ToString()
+            branchacctemail.Text = .Item("billingemail").ToString()
+            branchwebaddress.Text = .Item("website").ToString()
+            branchfax.Text = .Item("faxnumber").ToString()
+
+
             shipaddressline1.Text = .Item("shippingaddressline1").ToString()
             billaddressline.Text = .Item("billingaddressline1").ToString()
             shipaddressline2.Text = .Item("shippingaddressline2").ToString()
             billaddressline2.Text = .Item("billingaddressline2").ToString()
             shipcity.Text = .Item("shippingcity").ToString()
             billcity.Text = .Item("billingcity").ToString()
-            ' shipstate.Text = .Item("shippingstate").ToString()
-            'billstate.Text = .Item("billingstate").ToString()
+            shipstate.SelectedValue = .Item("shippingstateid").ToString()
+
+            billstate.SelectedValue = .Item("billingstateid").ToString()
             shipzip.Text = .Item("shippingzipcode").ToString()
             billzip.Text = .Item("billingzipcode").ToString()
-            'shipcountry.Text = .Item("shippingcountry").ToString()
-            'billcountry.Text = .Item("billingcountry").ToString()
+            ddshipcountry.Text = .Item("shippingcountryid").ToString()
+            ddbillcountry.Text = .Item("billingcountryid").ToString()
         End With
 
 
@@ -344,63 +358,250 @@ Public Class WebForm2
 
 
 
-
-
-
-
     End Sub
 
 
 
     Protected Sub continuebutton1_Click(sender As Object, e As EventArgs)
 
+        strSQL = "UPDATE branchT SET "
+        strSQL += "branchphone='" + branchphone.Text & "', "
+        strSQL += "primaryemail='" + branchmainemail.Text & "', "
+        strSQL += "billingemail='" + branchacctemail.Text & "', "
+        strSQL += "website='" + branchwebaddress.Text & "', "
+        strSQL += "faxnumber='" + branchfax.Text & "', "
+
+
+        strSQL += "shippingaddressline1='" + shipaddressline1.Text & "', "
+        strSQL += "billingaddressline1='" + billaddressline.Text & "', "
+        strSQL += "shippingaddressline2='" + shipaddressline2.Text & "', "
+        strSQL += "billingaddressline2='" + billaddressline2.Text & "', "
+        strSQL += "shippingcity='" + shipcity.Text & "', "
+        strSQL += "billingcity='" + billcity.Text & "', "
+        strSQL += "shippingstateid=" + shipstate.Text & ", "
+        strSQL += "billingstateid=" + billstate.Text & ", "
+        strSQL += "shippingzipcode=" + shipzip.Text & ", "
+        strSQL += "billingzipcode=" + billzip.Text & ", "
+        strSQL += "shippingcountryid=" + ddshipcountry.Text & ", "
+        strSQL += "billingcountryid=" + ddbillcountry.Text & ""
+
+
+        strSQL += " WHERE branchid = " + branch.SelectedValue + ""
+        'Response.Write("<font color=white>" & strSQL & " <br>")
+
+        SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+        Tab1.CssClass = "Initial"
+        Tab2.CssClass = "Clicked"
+        Tab2.Visible = True
+        MainView.ActiveViewIndex = 2
+
+
     End Sub
 
     Protected Sub shipstate_PreRender(sender As Object, e As EventArgs)
-        ' Load States...
-        strSQL = "SELECT stateid, statename FROM stateT ORDER BY statename"
-        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-        If ds Is Nothing Then
-        ElseIf ds.Tables.Count = 0 Then
-        ElseIf ds.Tables(0).Rows.Count = 0 Then
-        Else
-            shipstate.DataValueField = "stateid"
-            shipstate.DataTextField = "statename"
-            shipstate.DataSource = ds
-            shipstate.DataBind()
+        If Not IsPostBack Then
+
+            ' Load States...
+            strSQL = "SELECT stateid, statename FROM stateT ORDER BY statename"
+            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            If ds Is Nothing Then
+            ElseIf ds.Tables.Count = 0 Then
+            ElseIf ds.Tables(0).Rows.Count = 0 Then
+            Else
+                shipstate.DataValueField = "stateid"
+                shipstate.DataTextField = "statename"
+                shipstate.DataSource = ds
+                shipstate.DataBind()
+            End If
+
         End If
+
     End Sub
 
     Protected Sub billstate_PreRender(sender As Object, e As EventArgs)
-        ' Load States...
-        strSQL = "SELECT stateid, statename FROM stateT ORDER BY statename"
-        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-        If ds Is Nothing Then
-        ElseIf ds.Tables.Count = 0 Then
-        ElseIf ds.Tables(0).Rows.Count = 0 Then
-        Else
-            billstate.DataValueField = "stateid"
-            billstate.DataTextField = "statename"
-            billstate.DataSource = ds
-            billstate.DataBind()
+        If Not IsPostBack Then
+
+
+            ' Load States...
+            strSQL = "SELECT stateid, statename FROM stateT ORDER BY statename"
+            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            If ds Is Nothing Then
+            ElseIf ds.Tables.Count = 0 Then
+            ElseIf ds.Tables(0).Rows.Count = 0 Then
+            Else
+                billstate.DataValueField = "stateid"
+                billstate.DataTextField = "statename"
+                billstate.DataSource = ds
+                billstate.DataBind()
+            End If
         End If
+
+
     End Sub
 
     Protected Sub ddbillcountry_PreRender(sender As Object, e As EventArgs)
-        strSQL = "SELECT countryid, countryname FROM countryT ORDER BY countryname"
+
+        If Not IsPostBack Then
+
+
+
+            strSQL = "SELECT countryid, countryname FROM countryT ORDER BY countryname"
+            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            If ds Is Nothing Then
+            ElseIf ds.Tables.Count = 0 Then
+            ElseIf ds.Tables(0).Rows.Count = 0 Then
+            Else
+                ddbillcountry.DataValueField = "countryid"
+                ddbillcountry.DataTextField = "countryname"
+                ddbillcountry.DataSource = ds
+                ddbillcountry.DataBind()
+            End If
+
+        End If
+
+
+    End Sub
+
+    Protected Sub ddshipcountry_PreRender(sender As Object, e As EventArgs)
+
+        If Not IsPostBack Then
+
+
+            strSQL = "SELECT countryid, countryname FROM countryT ORDER BY countryname"
+            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            If ds Is Nothing Then
+            ElseIf ds.Tables.Count = 0 Then
+            ElseIf ds.Tables(0).Rows.Count = 0 Then
+            Else
+                ddshipcountry.DataValueField = "countryid"
+                ddshipcountry.DataTextField = "countryname"
+                ddshipcountry.DataSource = ds
+                ddshipcountry.DataBind()
+            End If
+
+        End If
+
+
+    End Sub
+
+    Protected Sub ddcontacts_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+
+
+        strSQL = "SELECT * FROM contactT INNER JOIN EmployeeInfoT ON ContactT.contactid=EmployeeinfoT.contactid INNER JOIN userT ON contactT.contactid=userT.contactid  where contactT.contactid=" + ddcontacts.SelectedValue
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+
+
+
+        With ds.Tables(0).Rows(0)
+
+            'prefix.Text = .Item("prefix").ToString()
+            lastname.Text = .Item("lastname").ToString()
+            middle.Text = .Item("middleinitial").ToString()
+            firstname.Text = .Item("firstname").ToString()
+            'suffix.Text = .Item("suffix").ToString()
+
+
+            jobtitle.Text = .Item("jobtitle").ToString()
+            mobilephone.Text = .Item("mobilephone").ToString()
+            officephone.Text = .Item("officephone").ToString()
+            homephone.Text = .Item("homephone").ToString()
+            personalemail.Text = .Item("personalemail").ToString()
+            workemail.Text = .Item("workemail").ToString()
+            ext.Text = .Item("extension").ToString()
+
+            username.Text = .Item("username").ToString()
+            password.Text = .Item("password").ToString()
+            dduserrole.SelectedValue = .Item("securityroleid")
+
+            employeeaddress.Text = .Item("Address").ToString()
+            employeeapartmentno.Text = .Item("apartmentnumber").ToString()
+            employeecity.Text = .Item("city").ToString()
+            employeestate.SelectedValue = .Item("stateid")
+            employeezipcode.Text = .Item("zipcode").ToString()
+            'employeecountry.SelectedValue = .Item("countryid")
+            emerlastname.Text = .Item("emergencycontactlastname").ToString()
+            emermiddleinitial.Text = .Item("emergencycontactmiddleinitial").ToString()
+            emerfirstname.Text = .Item("emergencycontactfirstname").ToString()
+            emerrelationship.Text = .Item("emergencycontactrelationship").ToString()
+            emerphone.Text = .Item("emergencycontactphonenumber").ToString()
+            emeremail.Text = .Item("emergencycontactemailaddress").ToString()
+
+            emphiredate.Text = .Item("hiredate").ToString()
+
+
+
+
+
+
+            'username.Text = .Item("username").ToString()
+            ' password.Text = .Item("password").ToString()
+            'dduserrole.SelectedValue = .Item("userroleid").ToString()
+
+
+            'ddshipcountry.Text = .Item("shippingcountryid").ToString()
+            'ddbillcountry.Text = .Item("billingcountryid").ToString()
+        End With
+
+        Session("ddcontacts") = ddcontacts.SelectedValue
+
+    End Sub
+
+    Protected Sub ddcontacts_PreRender(sender As Object, e As EventArgs)
+        strSQL = "SELECT contactid,lastname + ', ' + firstname AS Fullname  FROM contactT ORDER BY lastname"
         ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
         If ds Is Nothing Then
         ElseIf ds.Tables.Count = 0 Then
         ElseIf ds.Tables(0).Rows.Count = 0 Then
         Else
-            ddbillcountry.DataValueField = "countryid"
-            ddbillcountry.DataTextField = "countryname"
-            ddbillcountry.DataSource = ds
-            ddbillcountry.DataBind()
+            ddcontacts.DataValueField = "contactid"
+            ddcontacts.DataTextField = "fullname"
+            ddcontacts.DataSource = ds
+            ddcontacts.DataBind()
+        End If
+        ddcontacts.SelectedValue = Session("ddcontacts")
+    End Sub
+
+    Protected Sub btnsave_Click(sender As Object, e As EventArgs)
+        strSQL = "INSERT INTO contactT (firstname,middleinitial,lastname,mobilephone,officephone,homephone,isvendor) VALUES ('" + companyname.Text + "','" + ismaincompany.Checked.ToString() + "','" + iscustomer.Checked.ToString() + "','" + isvendor.Checked.ToString() +
+        "')"
+        SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+    End Sub
+
+    Protected Sub dduserrole_PreRender(sender As Object, e As EventArgs)
+        strSQL = "SELECT securityroleid,securityrolename    FROM securityroleT ORDER BY securityrolename"
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+        If ds Is Nothing Then
+        ElseIf ds.Tables.Count = 0 Then
+        ElseIf ds.Tables(0).Rows.Count = 0 Then
+        Else
+            dduserrole.DataValueField = "securityroleid"
+            dduserrole.DataTextField = "securityrolename"
+            dduserrole.DataSource = ds
+            dduserrole.DataBind()
         End If
     End Sub
 
-    Protected Sub ddshipcountry_PreRender(sender As Object, e As EventArgs)
+    Protected Sub employeestate_PreRender(sender As Object, e As EventArgs)
+
+
+
+        ' Load States...
+        strSQL = "SELECT stateid, statename FROM stateT ORDER BY statename"
+            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            If ds Is Nothing Then
+            ElseIf ds.Tables.Count = 0 Then
+            ElseIf ds.Tables(0).Rows.Count = 0 Then
+            Else
+                employeestate.DataValueField = "stateid"
+                employeestate.DataTextField = "statename"
+                employeestate.DataSource = ds
+                employeestate.DataBind()
+            End If
+
+    End Sub
+
+    Protected Sub employeecountry_SelectedIndexChanged(sender As Object, e As EventArgs)
         strSQL = "SELECT countryid, countryname FROM countryT ORDER BY countryname"
         ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
         If ds Is Nothing Then

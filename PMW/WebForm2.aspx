@@ -71,7 +71,7 @@ hr.new5 {
 
                 <asp:Button Text="Company" BorderStyle="None" ID="Tab1" CssClass="Initial" runat="server"
                     OnClick="Tab1_Click" />
-                <asp:Button Text="Personal" BorderStyle="None" ID="Tab2" CssClass="Initial" runat="server"
+                <asp:Button Text="Contact" BorderStyle="None" ID="Tab2" CssClass="Initial" runat="server"
                     OnClick="Tab2_Click" />
                 <asp:Button Text="Employee" BorderStyle="None" ID="Tab3" CssClass="Initial" runat="server"
                     OnClick="Tab3_Click" />
@@ -175,9 +175,7 @@ hr.new5 {
 
      </asp:TableRow>
  
-         
-
-       
+      
 
 <asp:TableRow>
     <asp:TableCell ColumnSpan="6">
@@ -214,20 +212,90 @@ hr.new5 {
     <asp:TextBox ID="branchname" runat="server"></asp:TextBox>
      
      </asp:TableCell>
+
+
           <asp:TableCell>
     <asp:Button ID="btnsavebranch" runat="server"  Text="Save" OnClick="btnsavebranch_Click"   />
     <asp:Button ID="btncancelbranch" runat="server" Text="Cancel"  OnClick="btncancelbranch_Click"    />
 </asp:TableCell>
  </asp:TableRow>
+
+
+
+
+
+
 <asp:TableRow>
     <asp:TableCell  ColumnSpan="6">
         <br /><hr class="new1">
     </asp:TableCell>
 </asp:TableRow>
+ 
+     <asp:TableRow>
+                       <asp:TableCell>
+                    
+    <asp:Label ID="Label40" runat="server" Text="Phone Number"></asp:Label>
+</asp:TableCell>
+<asp:TableCell>
+    <asp:TextBox ID="branchphone" runat="server"></asp:TextBox>
+     
+     </asp:TableCell>
+      <asp:TableCell>
+                    
+    <asp:Label ID="Label41" runat="server" Text="Fax Number"></asp:Label>
+</asp:TableCell>
+<asp:TableCell>
+    <asp:TextBox ID="branchfax" runat="server"></asp:TextBox>
+     
+     </asp:TableCell>
+     </asp:TableRow>
+
+
+
+          <asp:TableRow>
+                       <asp:TableCell>
+                    
+    <asp:Label ID="Label42" runat="server" Text="Main Email"></asp:Label>
+</asp:TableCell>
+<asp:TableCell>
+    <asp:TextBox ID="branchmainemail" runat="server"></asp:TextBox>
+     
+     </asp:TableCell>
+      <asp:TableCell>
+                    
+    <asp:Label ID="Label43" runat="server" Text="Accounting Email"></asp:Label>
+</asp:TableCell>
+<asp:TableCell>
+    <asp:TextBox ID="branchacctemail" runat="server"></asp:TextBox>
+     
+     </asp:TableCell>
+     </asp:TableRow>
+
+
+          <asp:TableRow>
+                       <asp:TableCell>
+                    
+    <asp:Label ID="Label46" runat="server" Text="Web Address"></asp:Label>
+</asp:TableCell>
+<asp:TableCell>
+    <asp:TextBox ID="branchwebaddress" runat="server"></asp:TextBox>
+     
+     </asp:TableCell>
+     
+     </asp:TableRow>
+              
+
+
+
+
+
+
 
 
 <asp:TableRow>
-     
+
+
+
     <asp:TableCell ColumnSpan="2">
       <b> Shipping Address</b>
     </asp:TableCell>
@@ -299,7 +367,7 @@ hr.new5 {
                 <asp:Label CssClass="labels" ID="Label4" runat="server" Text="State  " ></asp:Label>
                </asp:TableCell >
               <asp:TableCell>
-                 <asp:DropDownList ID="shipstate" runat="server" OnPreRender="shipstate_PreRender" AutoPostBack="True"  >
+                 <asp:DropDownList ID="shipstate" runat="server" OnPreRender="shipstate_PreRender" AutoPostBack="false"  >
                   <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                 </asp:DropDownList>
                   </asp:TableCell >
@@ -308,7 +376,7 @@ hr.new5 {
                       <asp:Label CssClass="labels" ID="Label5" runat="server" Text="State  " ></asp:Label>
                </asp:TableCell>
               <asp:TableCell>
-                 <asp:DropDownList ID="billstate" OnPreRender="billstate_PreRender" runat="server" AutoPostBack="True"  >
+                 <asp:DropDownList ID="billstate" OnPreRender="billstate_PreRender" runat="server" AutoPostBack="FAlse"  >
                   <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                 </asp:DropDownList>
                   </asp:TableCell >
@@ -399,80 +467,7 @@ hr.new5 {
                         <table style="width: 100%; border-width: 1px; border-color: #666; border-style: solid">
                             <tr>
                                 <td>
-                                    <asp:Table ID="Table2" runat="server" CellPadding="2" CellSpacing="2" Height="376px" Width="100%">
-										<asp:TableRow>
-											<asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label14" runat="server" Text="First Name  " ></asp:Label>
-                                           </asp:TableCell>
-											<asp:TableCell>
-                                             <asp:TextBox ID="TextBox4" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-										</asp:TableRow>
-										<asp:TableRow>
-											<asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label22" runat="server" Text="Middle Initial " ></asp:Label>
-                                           </asp:TableCell>
-											<asp:TableCell>
-                                             <asp:TextBox ID="TextBox5" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-										</asp:TableRow>
-										<asp:TableRow>
-											<asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label23" runat="server" Text="Last Name  " ></asp:Label>
-                                           </asp:TableCell>
-											<asp:TableCell>
-                                             <asp:TextBox ID="TextBox6" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-										</asp:TableRow>
-										<asp:TableRow>
-											<asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label24" runat="server" Text="Mobile Phone  " ></asp:Label>
-                                           </asp:TableCell>
-											<asp:TableCell>
-                                             <asp:TextBox ID="TextBox7" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-										</asp:TableRow>
-										<asp:TableRow>
-											<asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label25" runat="server" Text="Office Phone  " ></asp:Label>
-                                           </asp:TableCell>
-											<asp:TableCell>
-                                             <asp:TextBox ID="TextBox8" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-										</asp:TableRow>
-										<asp:TableRow>
-											<asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label26" runat="server" Text="Extension  " ></asp:Label>
-                                           </asp:TableCell>
-											<asp:TableCell>
-                                             <asp:TextBox ID="TextBox9" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-										</asp:TableRow>
-										<asp:TableRow>
-											<asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label27" runat="server" Text="Home Phone  " ></asp:Label>
-                                           </asp:TableCell>
-											<asp:TableCell>
-                                             <asp:TextBox ID="TextBox10" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-										</asp:TableRow>
-										<asp:TableRow>
-											<asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label28" runat="server" Text="Personal Email  " ></asp:Label>
-                                           </asp:TableCell>
-											<asp:TableCell>
-                                             <asp:TextBox ID="TextBox11" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-										</asp:TableRow>
-										<asp:TableRow>
-											<asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label29" runat="server" Text="Work Email  " ></asp:Label>
-                                           </asp:TableCell>
-											<asp:TableCell>
-                                             <asp:TextBox ID="TextBox12" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-										</asp:TableRow>
-									</asp:Table>
+                                   
                                     <br />
                                     <br />
                                 </td>
@@ -492,11 +487,161 @@ hr.new5 {
                                 <td>
                                     <br />
                                     
+                                   
                                     <asp:Table ID="Table1" runat="server"  CellPadding="2" CellSpacing="2"   Width="100%" Height="376px" >
+
+                                          
+					<asp:TableRow>
+                        <asp:TableCell>
+                            <b>Existing Contacts</b>
+
+                        </asp:TableCell>
+                        <asp:TableCell>
+                            <asp:DropDownList ID="ddcontacts"  AutoPostBack="True" OnPreRender="ddcontacts_PreRender" OnSelectedIndexChanged="ddcontacts_SelectedIndexChanged" runat="server">
+                                  <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+                            </asp:DropDownList>
+                        </asp:TableCell>
+
+                        </asp:TableRow>
+<asp:TableRow>
+													<asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label47" runat="server" Text="Prefix  " ></asp:Label>
+</asp:TableCell>
+							<asp:TableCell>
+  <asp:TextBox ID="prefix" runat="server" ></asp:TextBox>
+</asp:TableCell>	
+                        							<asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label24" runat="server" Text="Mobile Phone  " ></asp:Label>
+</asp:TableCell>
+							<asp:TableCell>
+  <asp:TextBox ID="mobilephone" runat="server" ></asp:TextBox>
+</asp:TableCell>
+                 </asp:TableRow>
+                 <asp:TableRow>
+                     
+                        <asp:TableCell HorizontalAlign="left">
+         <asp:Label CssClass="labels" ID="Label14" runat="server" Text="First Name  " ></asp:Label>
+        </asp:TableCell>
+									<asp:TableCell>
+          <asp:TextBox ID="firstname" runat="server" ></asp:TextBox>
+        </asp:TableCell>
+					</asp:TableRow>
+					<asp:TableRow>
+									<asp:TableCell HorizontalAlign="left">
+         <asp:Label CssClass="labels" ID="Label22" runat="server" Text="Middle Initial " ></asp:Label>
+        </asp:TableCell>
+									<asp:TableCell>
+          <asp:TextBox ID="middle" runat="server" ></asp:TextBox>
+        </asp:TableCell>
+
+                        							<asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label25" runat="server" Text="Office Phone  " ></asp:Label>
+</asp:TableCell>
+							<asp:TableCell>
+  <asp:TextBox ID="officephone" runat="server" width="100" ></asp:TextBox>
+
+
+
+
+ <asp:Label CssClass="labels" ID="Label26" runat="server" Text="Ext." ></asp:Label>
+
+  <asp:TextBox ID="ext" runat="server" Width="50" ></asp:TextBox>
+</asp:TableCell>
+					</asp:TableRow>
+					<asp:TableRow>
+									<asp:TableCell HorizontalAlign="left">
+         <asp:Label CssClass="labels" ID="Label23" runat="server" Text="Last Name  " ></asp:Label>
+        </asp:TableCell>
+									<asp:TableCell>
+          <asp:TextBox ID="lastname" runat="server" ></asp:TextBox>
+        </asp:TableCell>
+
+                        							<asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label27" runat="server" Text="Home Phone  " ></asp:Label>
+</asp:TableCell>
+							<asp:TableCell>
+  <asp:TextBox ID="homephone" runat="server" ></asp:TextBox>
+</asp:TableCell>
+
+
+					</asp:TableRow>
+
+                                        			<asp:TableRow>
+							<asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label48" runat="server" Text="Suffix  " ></asp:Label>
+</asp:TableCell>
+							<asp:TableCell>
+  <asp:TextBox ID="suffix" runat="server" ></asp:TextBox>
+</asp:TableCell>
+                                                        							<asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label28" runat="server" Text="Personal Email  " ></asp:Label>
+</asp:TableCell>
+							<asp:TableCell>
+  <asp:TextBox ID="personalemail" runat="server" ></asp:TextBox>
+</asp:TableCell>
+
+			</asp:TableRow>
+
+
+                                        			<asp:TableRow>
+							<asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label49" runat="server" Text="Job Title  " ></asp:Label>
+</asp:TableCell>
+							<asp:TableCell>
+  <asp:TextBox ID="jobtitle" runat="server" ></asp:TextBox>
+</asp:TableCell>
+                                                        							<asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label29" runat="server" Text="Work Email  " ></asp:Label>
+</asp:TableCell>
+							<asp:TableCell>
+  <asp:TextBox ID="workemail" runat="server" ></asp:TextBox>
+</asp:TableCell>
+
+			</asp:TableRow>
+					 
+	<asp:TableRow>
+        <asp:TableCell>
+          <br /> <b> PMW Console User Info</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:CheckBox ID="isconsoleuser" runat="server" />
+        </asp:TableCell>
+	</asp:TableRow>	
+
+                                        	<asp:TableRow>
+          <asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label38" runat="server" Text="Username: " ></asp:Label>
+</asp:TableCell >
+
+<asp:TableCell >
+  <asp:TextBox ID="username" runat="server" ></asp:TextBox>
+</asp:TableCell>
+
+<asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label39" runat="server" Text="Password" ></asp:Label>
+</asp:TableCell >
+
+<asp:TableCell >
+  <asp:TextBox ID="password" runat="server" ></asp:TextBox>
+</asp:TableCell>
+	</asp:TableRow>	
+                                        
+				<asp:TableRow>
+                    <asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label50" runat="server" Text="User Role" ></asp:Label>
+</asp:TableCell >
+                    <asp:TableCell>
+                       <asp:DropDownList ID="dduserrole" OnPreRender="dduserrole_PreRender" runat="server">
+
+                       </asp:DropDownList>
+                    </asp:TableCell>
+				</asp:TableRow> 
+					 
+					 
+					 
+	 
+
                                <asp:TableRow>
      
                                     <asp:TableCell ColumnSpan="2">
-                                      <b> Employee Address</b>
+                                     <br /> <b> Employee Address</b>
                                     </asp:TableCell>
      
                                      <asp:TableCell   HorizontalAlign="left">
@@ -569,7 +714,7 @@ hr.new5 {
                                            </asp:TableCell >
 
                                            <asp:TableCell >
-                                             <asp:DropDownList ID="employeestate" runat="server" AutoPostBack="True"  >
+                                             <asp:DropDownList ID="employeestate" OnPreRender="employeestate_PreRender" runat="server" AutoPostBack="True"  >
                                               <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                                             </asp:DropDownList>
                                            </asp:TableCell>
@@ -607,7 +752,7 @@ hr.new5 {
                                            </asp:TableCell >
 
                                            <asp:TableCell >
-                                             <asp:DropDownList ID="employeecountry" runat="server" AutoPostBack="True"  >
+                                             <asp:DropDownList ID="employeecountry" OnSelectedIndexChanged="employeecountry_SelectedIndexChanged" runat="server" AutoPostBack="True"  >
                                               <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                                             </asp:DropDownList>
                                            </asp:TableCell>
@@ -617,7 +762,7 @@ hr.new5 {
                                            </asp:TableCell >
 
                                            <asp:TableCell >
-                                             <asp:TextBox ID="relationship" runat="server" ></asp:TextBox>
+                                             <asp:TextBox ID="emerrelationship" runat="server" ></asp:TextBox>
                                            </asp:TableCell>
                                         
                                   </asp:TableRow>
@@ -625,7 +770,7 @@ hr.new5 {
                                         <asp:TableRow>
      
     <asp:TableCell ColumnSpan="2">
-      <b>Employment Terms</b>
+    <br />  <b>Employment Terms</b>
     </asp:TableCell>
      
      <asp:TableCell   HorizontalAlign="left">
@@ -645,7 +790,7 @@ hr.new5 {
                                            </asp:TableCell>
 
                                             <asp:TableCell>
-                                                  <asp:CheckBox runat="server" Text="Employe is Active" ID="empisactive" />
+                                                  <asp:CheckBox runat="server" Text="Employee is Active" ID="empisactive" />
                                             </asp:TableCell>
 
 
@@ -664,7 +809,7 @@ hr.new5 {
                                            </asp:TableCell>
 
                                             <asp:TableCell>
-                                                  <asp:CheckBox runat="server" Text="Employe is a Manager" ID="empismanager" />
+                                                  <asp:CheckBox runat="server" Text="Employee is a Manager" ID="empismanager" />
                                             </asp:TableCell>
 
 
@@ -683,7 +828,7 @@ hr.new5 {
                                            </asp:TableCell>
 
                                             <asp:TableCell>
-                                                  <asp:CheckBox runat="server" Text="Employe is a Salesman" ID="empissalesman" />
+                                                  <asp:CheckBox runat="server" Text="Employee is a Salesman" ID="empissalesman" />
                                             </asp:TableCell>
 
 
@@ -702,7 +847,7 @@ hr.new5 {
                                            </asp:TableCell>
 
                                             <asp:TableCell>
-                                                  <asp:CheckBox runat="server" Text="Employe Works Full Time" ID="empworkfulltime" />
+                                                  <asp:CheckBox runat="server" Text="Employee Works Full Time" ID="empworkfulltime" />
                                             </asp:TableCell>
 
 
@@ -720,12 +865,13 @@ hr.new5 {
                                             </asp:DropDownList>
                                            </asp:TableCell>
 
+                                          
+
+                                        </asp:TableRow>
+                                        <asp:TableRow>
                                             <asp:TableCell>
-                                                  <asp:CheckBox runat="server" Text="Allow Web Console Access" ID="empallowwebaccess" />
+                                                <asp:Button ID="btnsave" runat="server" OnClick="btnsave_Click" />
                                             </asp:TableCell>
-
-
-
                                         </asp:TableRow>
 
                                         </asp:Table>
@@ -784,21 +930,7 @@ hr.new5 {
                                     <br />
                                           <asp:TableRow>
 
-                                    <asp:TableCell HorizontalAlign="left">
-                                  <asp:Label CssClass="labels" ID="Label38" runat="server" Text="Username: " ></asp:Label>
-                                 </asp:TableCell >
-
-                                 <asp:TableCell >
-                                   <asp:TextBox ID="username" runat="server" ></asp:TextBox>
-                                 </asp:TableCell>
-
-                                 <asp:TableCell HorizontalAlign="left">
-                                  <asp:Label CssClass="labels" ID="Label39" runat="server" Text="Password" ></asp:Label>
-                                 </asp:TableCell >
-
-                                 <asp:TableCell >
-                                   <asp:TextBox ID="password" runat="server" ></asp:TextBox>
-                                 </asp:TableCell>
+                                   
 
            
       
