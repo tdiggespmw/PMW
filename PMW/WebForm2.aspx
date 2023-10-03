@@ -2,7 +2,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 	 
-    <title></title>
+     
+
+    <script type = "text/javascript">
+        function Confirm() {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm("Do you want to save data?")) {
+                confirm_value.value = "Yes";
+            } else {
+                confirm_value.value = "No";
+            }
+            document.forms[0].appendChild(confirm_value);
+        }
+    </script>
+
+
+
+
+
     <style type="text/css">
         .Initial
         {
@@ -190,7 +209,7 @@ hr.new5 {
 
                <asp:TableCell >  
                     <asp:Button runat="server"  ID="addnewbranch" text="+" OnClick="addnewbranch_Click" />&nbsp;&nbsp;&nbsp;
-                 <asp:DropDownList ID="branch" runat="server"  OnSelectedIndexChanged ="branch_SelectedIndexChanged"  >
+                 <asp:DropDownList ID="branch" runat="server" AutoPostBack="true"  OnSelectedIndexChanged ="branch_onSelectedIndexChanged"  >
                     
                   <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                 </asp:DropDownList>
@@ -496,10 +515,11 @@ hr.new5 {
                             <b>Existing Contacts</b>
 
                         </asp:TableCell>
-                        <asp:TableCell>
+                        <asp:TableCell><asp:Button runat="server" ID="InsertUpdate" OnClick="InsertUpdate_Click" Text="+"    />&nbsp;&nbsp;&nbsp;
                             <asp:DropDownList ID="ddcontacts"  AutoPostBack="True" OnPreRender="ddcontacts_PreRender" OnSelectedIndexChanged="ddcontacts_SelectedIndexChanged" runat="server">
                                   <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                             </asp:DropDownList>
+                            
                         </asp:TableCell>
 
                         </asp:TableRow>
@@ -781,32 +801,42 @@ hr.new5 {
 </asp:TableRow>
 
                                         <asp:TableRow>
-                                           <asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label19" runat="server" Text="Hire Date  " ></asp:Label>
-                                           </asp:TableCell >
-
-                                           <asp:TableCell >
-                                             <asp:TextBox ID="emphiredate" runat="server" ></asp:TextBox>
-                                           </asp:TableCell>
-
-                                            <asp:TableCell>
-                                                  <asp:CheckBox runat="server" Text="Employee is Active" ID="empisactive" />
-                                            </asp:TableCell>
 
 
 
-                                        </asp:TableRow>
 
-                                          <asp:TableRow>
-                                           <asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label20" runat="server" Text="Pay Schedule  " ></asp:Label>
-                                           </asp:TableCell >
+                    <asp:TableCell HorizontalAlign="left">
+ <asp:Label CssClass="labels" ID="Label36" runat="server" Text="Work Shift  " ></asp:Label>
+</asp:TableCell >
 
-                                           <asp:TableCell >
-                                            <asp:DropDownList ID="emppayschedule" runat="server" AutoPostBack="True"  >
-                                              <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
-                                            </asp:DropDownList>
-                                           </asp:TableCell>
+<asp:TableCell >
+ <asp:DropDownList ID="empworkshift" OnPreRender="empworkshift_PreRender" runat="server" AutoPostBack="True"  >
+   <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+ </asp:DropDownList>
+</asp:TableCell>
+
+                                          <asp:TableCell>
+                                                <asp:CheckBox runat="server" Text="Employee is Active" ID="empisactive" />
+                                          </asp:TableCell>
+
+
+                                      </asp:TableRow>
+
+                                        <asp:TableRow>
+
+  <asp:TableCell HorizontalAlign="left">
+                                          <asp:Label CssClass="labels" ID="Label19" runat="server" Text="Hire Date  " ></asp:Label>
+                                         </asp:TableCell >
+
+                                         <asp:TableCell >
+                                           <asp:TextBox ID="emphiredate" runat="server" ></asp:TextBox>
+                                         </asp:TableCell>
+
+
+
+
+
+
 
                                             <asp:TableCell>
                                                   <asp:CheckBox runat="server" Text="Employee is a Manager" ID="empismanager" />
@@ -822,7 +852,7 @@ hr.new5 {
                                            </asp:TableCell >
 
                                            <asp:TableCell >
-                                            <asp:DropDownList ID="empdepartment" runat="server" AutoPostBack="True"  >
+                                            <asp:DropDownList ID="empdepartment" OnPreRender="empdepartment_PreRender" runat="server" AutoPostBack="True"  >
                                               <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                                             </asp:DropDownList>
                                            </asp:TableCell>
@@ -836,15 +866,15 @@ hr.new5 {
                                         </asp:TableRow>
 
                                          <asp:TableRow>
-                                           <asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label36" runat="server" Text="Work Shift  " ></asp:Label>
-                                           </asp:TableCell >
+                                          <asp:TableCell HorizontalAlign="left">
+  <asp:Label CssClass="labels" ID="Label37" runat="server" Text="Pay Type  " ></asp:Label>
+ </asp:TableCell >
 
-                                           <asp:TableCell >
-                                            <asp:DropDownList ID="empsorkshift" runat="server" AutoPostBack="True"  >
-                                              <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
-                                            </asp:DropDownList>
-                                           </asp:TableCell>
+ <asp:TableCell >
+  <asp:DropDownList ID="emppaytype" OnPreRender="emppaytype_PreRender" runat="server" AutoPostBack="True"  >
+    <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+  </asp:DropDownList>
+ </asp:TableCell>
 
                                             <asp:TableCell>
                                                   <asp:CheckBox runat="server" Text="Employee Works Full Time" ID="empworkfulltime" />
@@ -855,22 +885,22 @@ hr.new5 {
                                         </asp:TableRow>
 
                                          <asp:TableRow>
-                                           <asp:TableCell HorizontalAlign="left">
-                                            <asp:Label CssClass="labels" ID="Label37" runat="server" Text="Hourly Rate  " ></asp:Label>
-                                           </asp:TableCell >
-
-                                           <asp:TableCell >
-                                            <asp:DropDownList ID="emphourlyrate" runat="server" AutoPostBack="True"  >
-                                              <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
-                                            </asp:DropDownList>
-                                           </asp:TableCell>
-
                                           
+                                             <asp:TableCell>
+                                                   <asp:Label CssClass="labels" ID="Label20" runat="server" Text="Hourly Rate  " ></asp:Label>
+                                             </asp:TableCell>
+                                          <asp:TableCell>
+                                              <asp:TextBox ID="hourlyrate" runat="server" ></asp:TextBox>
+                                          </asp:TableCell>
 
                                         </asp:TableRow>
                                         <asp:TableRow>
+                                            <asp:TableCell></asp:TableCell>
+                                             <asp:TableCell></asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Button ID="btnsave" runat="server" OnClick="btnsave_Click" />
+                                                
+
+                                                <asp:Button ID="btnConfirm" runat="server" OnClick="OnConfirm" Text="Raise Confirm" OnClientClick="Confirm()"/>
                                             </asp:TableCell>
                                         </asp:TableRow>
 

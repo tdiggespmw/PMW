@@ -590,6 +590,15 @@ Partial Public Class WebForm2
     Protected WithEvents Table1 As Global.System.Web.UI.WebControls.Table
 
     '''<summary>
+    '''InsertUpdate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents InsertUpdate As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''ddcontacts control.
     '''</summary>
     '''<remarks>
@@ -1094,6 +1103,33 @@ Partial Public Class WebForm2
     Protected WithEvents emerrelationship As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Label36 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label36 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''empworkshift control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents empworkshift As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''empisactive control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents empisactive As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
     '''Label19 control.
     '''</summary>
     '''<remarks>
@@ -1110,33 +1146,6 @@ Partial Public Class WebForm2
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents emphiredate As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''empisactive control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents empisactive As Global.System.Web.UI.WebControls.CheckBox
-
-    '''<summary>
-    '''Label20 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label20 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''emppayschedule control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents emppayschedule As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''empismanager control.
@@ -1175,22 +1184,22 @@ Partial Public Class WebForm2
     Protected WithEvents empissalesman As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
-    '''Label36 control.
+    '''Label37 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label36 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Label37 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''empsorkshift control.
+    '''emppaytype control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents empsorkshift As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents emppaytype As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''empworkfulltime control.
@@ -1202,31 +1211,31 @@ Partial Public Class WebForm2
     Protected WithEvents empworkfulltime As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
-    '''Label37 control.
+    '''Label20 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label37 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Label20 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''emphourlyrate control.
+    '''hourlyrate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents emphourlyrate As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents hourlyrate As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''btnsave control.
+    '''btnConfirm control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnsave As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnConfirm As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''View4 control.
