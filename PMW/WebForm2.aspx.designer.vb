@@ -590,13 +590,13 @@ Partial Public Class WebForm2
     Protected WithEvents Table1 As Global.System.Web.UI.WebControls.Table
 
     '''<summary>
-    '''InsertUpdate control.
+    '''newcontact control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents InsertUpdate As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents newcontact As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''ddcontacts control.
@@ -885,6 +885,24 @@ Partial Public Class WebForm2
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dduserrole As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''EmplyeeInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmplyeeInfo As Global.System.Web.UI.WebControls.Table
+
+    '''<summary>
+    '''EmployeeInfo333 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmployeeInfo333 As Global.System.Web.UI.WebControls.TableRow
 
     '''<summary>
     '''Label13 control.
@@ -1227,6 +1245,15 @@ Partial Public Class WebForm2
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hourlyrate As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''InsertUpdate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents InsertUpdate As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''btnConfirm control.

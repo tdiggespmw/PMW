@@ -515,9 +515,9 @@ hr.new5 {
                             <b>Existing Contacts</b>
 
                         </asp:TableCell>
-                        <asp:TableCell><asp:Button runat="server" ID="InsertUpdate" OnClick="InsertUpdate_Click" Text="+"    />&nbsp;&nbsp;&nbsp;
-                            <asp:DropDownList ID="ddcontacts"  AutoPostBack="True" OnPreRender="ddcontacts_PreRender" OnSelectedIndexChanged="ddcontacts_SelectedIndexChanged" runat="server">
-                                  <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+                        <asp:TableCell> <asp:Button runat="server" ID="newcontact" Text="+"  OnClick="newcontact_Click"     />&nbsp;&nbsp;&nbsp;
+                            <asp:DropDownList ID="ddcontacts"  AutoPostBack="True"     OnSelectedIndexChanged="ddcontacts_SelectedIndexChanged" runat="server">
+                                  <asp:ListItem Text="--Add New0--" Value="0"></asp:ListItem>
                             </asp:DropDownList>
                             
                         </asp:TableCell>
@@ -654,11 +654,15 @@ hr.new5 {
                     </asp:TableCell>
 				</asp:TableRow> 
 					 
-					 
+			</asp:Table>
+                        <%If ismaincompany.Checked = True Then %>  
+                                    
+                                   
+                                    <asp:Table ID="EmplyeeInfo"  runat="server" >
 					 
 	 
 
-                               <asp:TableRow>
+                               <asp:TableRow ID="EmployeeInfo333">
      
                                     <asp:TableCell ColumnSpan="2">
                                      <br /> <b> Employee Address</b>
@@ -734,7 +738,7 @@ hr.new5 {
                                            </asp:TableCell >
 
                                            <asp:TableCell >
-                                             <asp:DropDownList ID="employeestate" OnPreRender="employeestate_PreRender" runat="server" AutoPostBack="True"  >
+                                             <asp:DropDownList ID="employeestate" OnPreRender="employeestate_PreRender" runat="server"    >
                                               <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                                             </asp:DropDownList>
                                            </asp:TableCell>
@@ -772,7 +776,7 @@ hr.new5 {
                                            </asp:TableCell >
 
                                            <asp:TableCell >
-                                             <asp:DropDownList ID="employeecountry" OnSelectedIndexChanged="employeecountry_SelectedIndexChanged" runat="server" AutoPostBack="True"  >
+                                             <asp:DropDownList ID="employeecountry" OnPreRender="employeecountry_PreRender" runat="server"    >
                                               <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                                             </asp:DropDownList>
                                            </asp:TableCell>
@@ -810,7 +814,7 @@ hr.new5 {
 </asp:TableCell >
 
 <asp:TableCell >
- <asp:DropDownList ID="empworkshift" OnPreRender="empworkshift_PreRender" runat="server" AutoPostBack="True"  >
+ <asp:DropDownList ID="empworkshift" OnPreRender="empworkshift_PreRender" runat="server"    >
    <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
  </asp:DropDownList>
 </asp:TableCell>
@@ -852,7 +856,7 @@ hr.new5 {
                                            </asp:TableCell >
 
                                            <asp:TableCell >
-                                            <asp:DropDownList ID="empdepartment" OnPreRender="empdepartment_PreRender" runat="server" AutoPostBack="True"  >
+                                            <asp:DropDownList ID="empdepartment" OnPreRender="empdepartment_PreRender" runat="server"    >
                                               <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                                             </asp:DropDownList>
                                            </asp:TableCell>
@@ -871,7 +875,7 @@ hr.new5 {
  </asp:TableCell >
 
  <asp:TableCell >
-  <asp:DropDownList ID="emppaytype" OnPreRender="emppaytype_PreRender" runat="server" AutoPostBack="True"  >
+  <asp:DropDownList ID="emppaytype" OnPreRender="emppaytype_PreRender" runat="server"    >
     <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
   </asp:DropDownList>
  </asp:TableCell>
@@ -900,13 +904,13 @@ hr.new5 {
                                             <asp:TableCell>
                                                 
 
-                                                <asp:Button ID="btnConfirm" runat="server" OnClick="OnConfirm" Text="Raise Confirm" OnClientClick="Confirm()"/>
+                                              
                                             </asp:TableCell>
                                         </asp:TableRow>
 
                                         </asp:Table>
-
-
+                                     <%End if %>
+  <asp:Button runat="server" ID="InsertUpdate" OnClick="ClearForm_Click" Text="ClearForm"    />&nbsp;&nbsp;&nbsp;<asp:Button ID="btnConfirm" runat="server" OnClick="OnConfirm" Text="Save" OnClientClick="Confirm()"/>
                                     <br />
                                 </td>
                             </tr>

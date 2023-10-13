@@ -63,28 +63,28 @@ Public Class WebForm2
                 company.DataSource = ds
                 company.DataBind()
             End If
-            Dim newItem2 As New ListItem
-            newItem2.Text = "--Select--"
-            newItem2.Value = "0"
-            company.Items.Insert(0, newItem2)
+            Dim newItem3 As New ListItem
+            newItem3.Text = "--SelectC--"
+            newItem3.Value = "0"
+            company.Items.Insert(0, newItem3)
 
-
-            newItem2.Text = "--Select--"
-            newItem2.Value = "0"
-            branch.Items.Insert(0, newItem2)
-
-            newItem2.Text = "--Select--"
-            newItem2.Value = "0"
-            ddcontacts.Items.Insert(0, newItem2)
-
-
+            Dim newItem33 As New ListItem
+            newItem33.Text = "--SelectB--"
+            newItem33.Value = "0"
+            branch.Items.Insert(0, newItem33)
 
             branch.Enabled = False
 
 
 
 
+            'If Session("contactid") <> 0 Then
+            '    ddcontacts.SelectedValue = Session("contactid")
+            'End If
+
         End If
+
+
 
     End Sub
 
@@ -224,7 +224,66 @@ Public Class WebForm2
         Tab4.Visible = False
         Tab5.Visible = False
         Tab6.Visible = False
+        ''*****************************************Clear FORM***************************************************************************************
 
+        ''**************************fixing contact dropdown**************************************
+        strSQL = "Select contactid, lastname + ', ' + firstname AS Fullname  FROM contactT  WHERE companyid=" + company.SelectedValue + "  ORDER BY lastname"
+            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            If ds Is Nothing Then
+            ElseIf ds.Tables.Count = 0 Then
+            ElseIf ds.Tables(0).Rows.Count = 0 Then
+            Else
+                ddcontacts.DataValueField = "contactid"
+                ddcontacts.DataTextField = "fullname"
+                ddcontacts.DataSource = ds
+                ddcontacts.DataBind()
+            End If
+        'If Session("contactid") > 0 Then
+        '    ddcontacts.SelectedValue = Session("ddcontacts")
+        'End If
+        Dim newItem21 As New ListItem
+        newItem21.Text = "--Select--"
+        newItem21.Value = "0"
+        ddcontacts.Items.Insert(0, newItem21)
+        ''*******************************************************************************
+
+        prefix.Text = ""
+        firstname.Text = ""
+        middle.Text = ""
+        lastname.Text = ""
+        suffix.Text = ""
+        jobtitle.Text = ""
+        mobilephone.Text = ""
+        officephone.Text = ""
+        ext.Text = ""
+        homephone.Text = ""
+        personalemail.Text = ""
+        workemail.Text = ""
+        username.Text = ""
+        password.Text = ""
+        'dduserrole.SelectedValue = 0
+        employeeaddress.Text = ""
+        employeeapartmentno.Text = ""
+        employeecity.Text = ""
+        'employeestate.SelectedValue = 31
+        employeezipcode.Text = ""
+        'employeecountry.SelectedValue = ""
+        emerfirstname.Text = ""
+        emermiddleinitial.Text = ""
+        emerlastname.Text = ""
+        emerphone.Text = ""
+        emeremail.Text = ""
+        emerrelationship.Text = ""
+        'empworkshift.SelectedValue = 0
+        emphiredate.Text = ""
+        'empdepartment.SelectedValue = 0
+        'emppaytype.SelectedValue = 0
+        hourlyrate.Text = ""
+
+        empisactive.Checked = False
+        empismanager.Checked = False
+        empissalesman.Checked = False
+        empworkfulltime.Checked = False
     End Sub
 
 
@@ -519,13 +578,16 @@ Public Class WebForm2
 
     Protected Sub ddcontacts_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-        If ddcontacts.SelectedValue <> 0 Then
 
-            strSQL = "SELECT * FROM contactT INNER JOIN EmployeeInfoT ON ContactT.contactid=EmployeeinfoT.contactid INNER JOIN userT ON contactT.contactid=userT.contactid  where contactT.contactid=" + ddcontacts.SelectedValue + "AND companyid=" + company.SelectedValue
+        strSQL = "SELECT * FROM contactT "
+
+            If ismaincompany.Checked = True Then
+                strSQL &= " INNER Join EmployeeInfoT On ContactT.contactid=EmployeeinfoT.contactid "
+
+            End If
+
+            strSQL &= "INNER JOIN userT On contactT.contactid=userT.contactid  where contactT.contactid=" + ddcontacts.SelectedValue + " And companyid=" + company.SelectedValue
             ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-
-
-
 
 
             With ds.Tables(0).Rows(0)
@@ -547,67 +609,59 @@ Public Class WebForm2
 
                 username.Text = .Item("username").ToString()
                 password.Text = .Item("password").ToString()
-                dduserrole.SelectedValue = .Item("securityroleid")
+            dduserrole.SelectedValue = .Item("securityroleid").ToString()
 
-                employeeaddress.Text = .Item("Address").ToString()
-                employeeapartmentno.Text = .Item("apartmentnumber").ToString()
-                employeecity.Text = .Item("city").ToString()
-                employeestate.SelectedValue = .Item("stateid").ToString()
-                employeezipcode.Text = .Item("zipcode").ToString()
-                'employeecountry.SelectedValue = .Item("countryid")
+            If ismaincompany.Checked = True Then
+                    employeeaddress.Text = .Item("Address").ToString()
+                    employeeapartmentno.Text = .Item("apartmentnumber").ToString()
+                    employeecity.Text = .Item("city").ToString()
+                    employeestate.SelectedValue = .Item("stateid").ToString()
+                    employeezipcode.Text = .Item("zipcode").ToString()
+                employeecountry.SelectedValue = .Item("countryid")
+
+
                 emerlastname.Text = .Item("emergencycontactlastname").ToString()
-                emermiddleinitial.Text = .Item("emergencycontactmiddleinitial").ToString()
-                emerfirstname.Text = .Item("emergencycontactfirstname").ToString()
-                emerrelationship.Text = .Item("emergencycontactrelationship").ToString()
-                emerphone.Text = .Item("emergencycontactphonenumber").ToString()
-                emeremail.Text = .Item("emergencycontactemailaddress").ToString()
+                    emermiddleinitial.Text = .Item("emergencycontactmiddleinitial").ToString()
+                    emerfirstname.Text = .Item("emergencycontactfirstname").ToString()
+                    emerrelationship.Text = .Item("emergencycontactrelationship").ToString()
+                    emerphone.Text = .Item("emergencycontactphonenumber").ToString()
+                    emeremail.Text = .Item("emergencycontactemailaddress").ToString()
 
-                emphiredate.Text = .Item("hiredate").ToString()
-
-
-                empisactive.Checked = .Item("activeemployee")
-                empismanager.Checked = .Item("ismanager").ToString()
-                empissalesman.Checked = .Item("issalesman")
-                empworkfulltime.Checked = .Item("isfulltime")
+                    emphiredate.Text = .Item("hiredate").ToString()
 
 
-
+                    empisactive.Checked = .Item("activeemployee")
+                    empismanager.Checked = .Item("ismanager")
+                    empissalesman.Checked = .Item("issalesman")
+                    empworkfulltime.Checked = .Item("isfulltime")
+                empworkshift.SelectedValue = .Item("workshiftid")
+                empdepartment.SelectedValue = .Item("departmentid")
+                emppaytype.SelectedValue = .Item("employeepaytypeid")
                 hourlyrate.Text = .Item("hourlypayrate").ToString()
-                ' password.Text = .Item("password").ToString()
-                'dduserrole.SelectedValue = .Item("userroleid").ToString()
+                End If
 
 
-                'ddshipcountry.Text = .Item("shippingcountryid").ToString()
-                'ddbillcountry.Text = .Item("billingcountryid").ToString()
-            End With
+            ' password.Text = .Item("password").ToString()
+            'dduserrole.SelectedValue = .Item("userroleid").ToString()
 
-            Dim newItem2 As New ListItem
-            newItem2.Text = "--Select--"
-            newItem2.Value = "0"
-            branch.Items.Insert(0, newItem2)
-            Session("ddcontacts") = ddcontacts.SelectedValue
-        End If
+
+            'ddshipcountry.Text = .Item("shippingcountryid").ToString()
+            'ddbillcountry.Text = .Item("billingcountryid").ToString()
+        End With
+
+        'Dim newItem2 As New ListItem
+        'newItem2.Text = "--Select--"
+        'newItem2.Value = "0"
+        'ddcontacts.Items.Insert(0, newItem2)
+        'Session("ddcontacts") = ddcontacts.SelectedValue
+
     End Sub
 
     Protected Sub ddcontacts_PreRender(sender As Object, e As EventArgs)
-        strSQL = "SELECT contactid,lastname + ', ' + firstname AS Fullname  FROM contactT  WHERE companyid=" + company.SelectedValue + "  ORDER BY lastname"
-        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-        If ds Is Nothing Then
-        ElseIf ds.Tables.Count = 0 Then
-        ElseIf ds.Tables(0).Rows.Count = 0 Then
-        Else
-            ddcontacts.DataValueField = "contactid"
-            ddcontacts.DataTextField = "fullname"
-            ddcontacts.DataSource = ds
-            ddcontacts.DataBind()
-        End If
 
-        Dim newItem2 As New ListItem
-        newItem2.Text = "--Add New--"
-        newItem2.Value = "0"
-        ddcontacts.Items.Insert(0, newItem2)
 
-        'ddcontacts.SelectedValue = Session("ddcontacts")
+
+
     End Sub
 
     Function btnsave_Click2()
@@ -630,16 +684,8 @@ Public Class WebForm2
             End Try
             '*********************INSERT USER INFORMATION    *************************************************************
 
-            Dim isconsoleuserchkd
 
-
-            If isconsoleuser.Checked Then
-                isconsoleuserchkd = 1
-            Else
-                isconsoleuserchkd = 0
-
-            End If
-            strSQL = "INSERT INTO userT (contactid,username,password,activeuser) VALUES (" + contactid + ",'" + username.Text + "', '" + password.Text + "', " + isconsoleuserchkd + ")"
+            strSQL = "INSERT INTO userT (contactid, password,username,securityroleid, activeuser) VALUES (" + contactid.ToString() + ",'" + password.Text + "', '" + username.Text + "', " + dduserrole.SelectedValue + ", '" + isconsoleuser.Checked.ToString() + "')"
 
             Try
                 SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
@@ -648,33 +694,61 @@ Public Class WebForm2
             End Try
 
             '*********************INSERT EMPLOYEE INFORMATION*************************************************************
-            strSQL = "INSERT INTO employeeT (companyid,username,password)     VALUES (" + contactid + ",'" + firstname.Text + "')"
+            If ismaincompany.Checked Then
 
-            Try
-                SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-            Catch ex As Exception
+                strSQL = "INSERT INTO employeeinfoT (contactid, departmentid, workshiftid,"
+                strSQL += "activeemployee, ismanager, issalesman, employeepaytypeid, isfulltime, "
+                strSQL += "hourlypayrate, hiredate, address, apartmentnumber, city, stateid, zipcode, "
+                strSQL += "countryid, emergencycontactlastname, emergencycontactfirstname, emergencycontactmiddleinitial, emergencycontactrelationship, emergencycontactphonenumber, "
+                strSQL += "emergencycontactemailaddress)     VALUES (" + contactid.ToString() + "," + empdepartment.SelectedValue + "," + empworkshift.SelectedValue + " ,"
+                strSQL += "'" + empisactive.Checked.ToString() + " ','" + empismanager.Checked.ToString() + "','" + empissalesman.Checked.ToString() + "'," + emppaytype.SelectedValue + ",
+				'" + empworkfulltime.Checked.ToString() + "','" + hourlyrate.Text + "','" + emphiredate.Text + "','" + employeeaddress.Text + "','" + employeeapartmentno.Text + "',
+				'" + employeecity.Text + "'," + employeestate.SelectedValue + ",'" + employeezipcode.Text + "'," + employeecountry.SelectedValue + ",'" + emerlastname.Text + "',
+				'" + emerfirstname.Text + "','" + emermiddleinitial.Text + "','" + emerrelationship.Text + "','" + emerphone.Text + "','" + emeremail.Text + "')"
+                'strSQL = "INSERT INTO employeeinfoT (contactid, departmentid, workshiftid,"
+                'strSQL += "activeemployee, ismanager, issalesman, employeepaytypeid, isfulltime, "
+                'strSQL += "hourlypayrate, hiredate, address, apartmentnumber, city, stateid, zipcode, "
+                'strSQL += "countryid, emergencycontactlastname, emergencycontactfirstname, emergencycontactmiddleinitial, emergencycontactrelationship, emergencycontactphonenumber, "
+                'strSQL += "emergencycontactemailaddress)     VALUES (" + contactid.ToString()
+                'strSQL += ",1,2 ,"
+                'strSQL += "'" + empisactive.Checked.ToString() + " ','" + empismanager.Checked.ToString() + "','" + empissalesman.Checked.ToString() + "'," + emppaytype.SelectedValue + ",'" + empworkfulltime.Checked.ToString() + "','" + hourlyrate.Text + "','" + emphiredate.Text + "','" + employeeaddress.Text + "','" + employeeapartmentno.Text + "','" + employeecity.Text + "'," + employeestate.SelectedValue + ",'" + employeezipcode.Text + "'," + employeecountry.SelectedValue + ",'" + emerlastname.Text + "','" + emerfirstname.Text + "','" + emermiddleinitial.Text + "','" + emerrelationship.Text + "','" + emerphone.Text + "','" + emeremail.Text + "')"
 
-            End Try
+                Try
+                    SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+                Catch ex As Exception
 
+                End Try
+            End If
         Else
-
             ''******************** UPDATE CONTACT INFORMATION ************************************************************
-            strSQL = "UPDATE contactT  SET ='" + companyname.Text + "'"
-
+            strSQL = "UPDATE contactT  SET firstname='" + firstname.Text + "', lastname='" + lastname.Text + "', middleinitial='" + middle.Text + "', mobilephone='" + mobilephone.Text + "', officephone='" + officephone.Text + "', homephone='" + homephone.Text + "', extension='" + ext.Text + "', personalemail='" + personalemail.Text + "', workemail='" + workemail.Text + "', jobtitle='" + jobtitle.Text + "' WHERE contactid = " + ddcontacts.SelectedValue
             Try
                 SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
             Catch ex As Exception
 
             End Try
+            ''******************** UPDATE USER INFORMATION ************************************************************
+            'strSQL = "UPDATE userT  SET username='" + username.Text + "', password='" + password.Text + "' WHERE contactid = " + ddcontacts.SelectedValue
 
+            strSQL = "UPDATE userT  SET username='" + username.Text + "', password='" + password.Text + "', activeuser='" + isconsoleuser.Checked.ToString() + "' WHERE contactid = " + ddcontacts.SelectedValue
+            Try
+                SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            Catch ex As Exception
+            End Try
+            ''******************** UPDATE CONTACT INFORMATION ************************************************************
+            strSQL = "UPDATE employeeinfoT  SET departmentid=" + empdepartment.SelectedValue + ", workshiftid=" + empworkshift.SelectedValue + ", activeemployee='" + empisactive.Checked.ToString() + "', ismanager='" + empismanager.Checked.ToString() + "', issalesman='" + empissalesman.Checked.ToString() + "', employeepaytypeid='" + emppaytype.SelectedValue + "', isfulltime='" + empworkfulltime.Checked.ToString() + "', hourlypayrate='" + hourlyrate.Text + "', hiredate='" + emphiredate.Text + "', address='" + employeeaddress.Text + "', apartmentnumber='" + employeeapartmentno.Text + "', city='" + employeecity.Text + "', stateid='" + employeestate.SelectedValue + "', zipcode='" + employeezipcode.Text + "', countryid='" + employeecountry.SelectedValue + "'"
 
+            strSQL += ", emergencycontactlastname='" + emerlastname.Text + "', emergencycontactfirstname='" + emerfirstname.Text + "', emergencycontactmiddleinitial='" + emermiddleinitial.Text + "',  emergencycontactrelationship='" + emerrelationship.Text + "', emergencycontactemailaddress='" + emeremail.Text + "' WHERE contactid = " + ddcontacts.SelectedValue
 
-
-
-
+            Try
+                SqlHelper.ExecuteNonQuery(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            Catch ex As Exception
+                ex.Message.ToString()
+            End Try
         End If
 
 
+        Return True
 
 
 
@@ -687,7 +761,7 @@ Public Class WebForm2
     End Function
 
     Protected Sub dduserrole_PreRender(sender As Object, e As EventArgs)
-        strSQL = "SELECT securityroleid,securityrolename    FROM securityroleT ORDER BY securityrolename"
+        strSQL = "Select securityroleid,securityrolename    FROM securityroleT ORDER BY securityrolename"
         ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
         If ds Is Nothing Then
         ElseIf ds.Tables.Count = 0 Then
@@ -700,7 +774,7 @@ Public Class WebForm2
         End If
 
         Dim newItem2 As New ListItem
-        newItem2.Text = "--Select--"
+        newItem2.Text = "--SelectUR--"
         newItem2.Value = "0"
         dduserrole.Items.Insert(0, newItem2)
 
@@ -711,7 +785,7 @@ Public Class WebForm2
 
 
         ' Load States...
-        strSQL = "SELECT stateid, statename FROM stateT ORDER BY statename"
+        strSQL = "Select stateid, statename FROM stateT ORDER BY statename"
         ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
         If ds Is Nothing Then
         ElseIf ds.Tables.Count = 0 Then
@@ -723,27 +797,15 @@ Public Class WebForm2
             employeestate.DataBind()
         End If
         Dim newItem2 As New ListItem
-        newItem2.Text = "--Select--"
+        newItem2.Text = "--SelectES--"
         newItem2.Value = "0"
         employeestate.Items.Insert(0, newItem2)
     End Sub
 
-    Protected Sub employeecountry_SelectedIndexChanged(sender As Object, e As EventArgs)
-        strSQL = "SELECT countryid, countryname FROM countryT ORDER BY countryname"
-        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-        If ds Is Nothing Then
-        ElseIf ds.Tables.Count = 0 Then
-        ElseIf ds.Tables(0).Rows.Count = 0 Then
-        Else
-            ddshipcountry.DataValueField = "countryid"
-            ddshipcountry.DataTextField = "countryname"
-            ddshipcountry.DataSource = ds
-            ddshipcountry.DataBind()
-        End If
-    End Sub
+
 
     Protected Sub empdepartment_PreRender(sender As Object, e As EventArgs)
-        strSQL = "SELECT departmentid, departmentname FROM departmentT ORDER BY departmentname"
+        strSQL = "Select departmentid, departmentname FROM departmentT ORDER BY departmentname"
         ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
         If ds Is Nothing Then
         ElseIf ds.Tables.Count = 0 Then
@@ -755,13 +817,13 @@ Public Class WebForm2
             empdepartment.DataBind()
         End If
         Dim newItem2 As New ListItem
-        newItem2.Text = "--Select--"
+        newItem2.Text = "--SelectED--"
         newItem2.Value = "0"
         empdepartment.Items.Insert(0, newItem2)
     End Sub
 
     Protected Sub empworkshift_PreRender(sender As Object, e As EventArgs)
-        strSQL = "SELECT workshiftid, shiftdescription FROM workshiftT ORDER BY shiftdescription"
+        strSQL = "Select workshiftid, shiftdescription FROM workshiftT ORDER BY shiftdescription"
         ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
         If ds Is Nothing Then
         ElseIf ds.Tables.Count = 0 Then
@@ -779,7 +841,7 @@ Public Class WebForm2
     End Sub
 
     Protected Sub emppaytype_PreRender(sender As Object, e As EventArgs)
-        strSQL = "SELECT employeepaytypeid, employeepaytype FROM employeepaytypeT ORDER BY employeepaytype"
+        strSQL = "Select employeepaytypeid, employeepaytype FROM employeepaytypeT ORDER BY employeepaytype"
         ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
         If ds Is Nothing Then
         ElseIf ds.Tables.Count = 0 Then
@@ -798,7 +860,7 @@ Public Class WebForm2
 
 
 
-    Protected Sub InsertUpdate_Click(sender As Object, e As EventArgs)
+    Protected Sub ClearForm_Click(sender As Object, e As EventArgs)
 
         ddcontacts.ClearSelection()
         prefix.Text = ""
@@ -839,7 +901,7 @@ Public Class WebForm2
         empissalesman.Checked = False
         empworkfulltime.Checked = False
 
-        ddcontacts.SelectedItem.Text = "--Add New--"
+        '' ddcontacts.SelectedItem.Text = "--Add New--"
 
     End Sub
 
@@ -856,8 +918,58 @@ Public Class WebForm2
         End If
     End Sub
 
+    Protected Sub employeecountry_PreRender(sender As Object, e As EventArgs)
+        strSQL = "Select countryid, countryname FROM countryT ORDER BY countryname"
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+        If ds Is Nothing Then
+        ElseIf ds.Tables.Count = 0 Then
+        ElseIf ds.Tables(0).Rows.Count = 0 Then
+        Else
+            employeecountry.DataValueField = "countryid"
+            employeecountry.DataTextField = "countryname"
+            employeecountry.DataSource = ds
+            employeecountry.DataBind()
+        End If
+    End Sub
 
+    Protected Sub newcontact_Click(sender As Object, e As EventArgs)
+        ddcontacts.ClearSelection()
+        prefix.Text = ""
+        firstname.Text = ""
+        middle.Text = ""
+        lastname.Text = ""
+        suffix.Text = ""
+        jobtitle.Text = ""
+        mobilephone.Text = ""
+        officephone.Text = ""
+        ext.Text = ""
+        homephone.Text = ""
+        personalemail.Text = ""
+        workemail.Text = ""
+        username.Text = ""
+        password.Text = ""
+        'dduserrole.SelectedValue = 0
+        employeeaddress.Text = ""
+        employeeapartmentno.Text = ""
+        employeecity.Text = ""
+        employeestate.SelectedValue = 31
+        employeezipcode.Text = ""
+        'employeecountry.SelectedValue = ""
+        emerfirstname.Text = ""
+        emermiddleinitial.Text = ""
+        emerlastname.Text = ""
+        emerphone.Text = ""
+        emeremail.Text = ""
+        emerrelationship.Text = ""
+        'empworkshift.SelectedValue = 0
+        emphiredate.Text = ""
+        'empdepartment.SelectedValue = 0
+        'emppaytype.SelectedValue = 0
+        hourlyrate.Text = ""
 
-
-
+        empisactive.Checked = False
+        empismanager.Checked = False
+        empissalesman.Checked = False
+        empworkfulltime.Checked = False
+    End Sub
 End Class
