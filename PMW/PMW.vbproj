@@ -157,12 +157,16 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="images\InitialImage.png" />
+    <Content Include="images\logo.png" />
     <Content Include="images\SelectedButton.png" />
+    <Content Include="Login.aspx" />
+    <Content Include="Styles\login.css" />
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="pmwDataSet.xsc">
       <DependentUpon>pmwDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="login.Master" />
     <None Include="pmwDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>pmwDataSet.Designer.vb</LastGenOutput>
@@ -236,6 +240,20 @@
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.designer.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.Master.designer.vb">
+      <DependentUpon>login.Master</DependentUpon>
+    </Compile>
+    <Compile Include="login.Master.vb">
+      <DependentUpon>login.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

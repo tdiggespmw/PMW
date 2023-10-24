@@ -228,16 +228,16 @@ Public Class WebForm2
 
         ''**************************fixing contact dropdown**************************************
         strSQL = "Select contactid, lastname + ', ' + firstname AS Fullname  FROM contactT  WHERE companyid=" + company.SelectedValue + "  ORDER BY lastname"
-            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-            If ds Is Nothing Then
-            ElseIf ds.Tables.Count = 0 Then
-            ElseIf ds.Tables(0).Rows.Count = 0 Then
-            Else
-                ddcontacts.DataValueField = "contactid"
-                ddcontacts.DataTextField = "fullname"
-                ddcontacts.DataSource = ds
-                ddcontacts.DataBind()
-            End If
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+        If ds Is Nothing Then
+        ElseIf ds.Tables.Count = 0 Then
+        ElseIf ds.Tables(0).Rows.Count = 0 Then
+        Else
+            ddcontacts.DataValueField = "contactid"
+            ddcontacts.DataTextField = "fullname"
+            ddcontacts.DataSource = ds
+            ddcontacts.DataBind()
+        End If
         'If Session("contactid") > 0 Then
         '    ddcontacts.SelectedValue = Session("ddcontacts")
         'End If
@@ -581,64 +581,64 @@ Public Class WebForm2
 
         strSQL = "SELECT * FROM contactT "
 
-            If ismaincompany.Checked = True Then
-                strSQL &= " INNER Join EmployeeInfoT On ContactT.contactid=EmployeeinfoT.contactid "
+        If ismaincompany.Checked = True Then
+            strSQL &= " INNER Join EmployeeInfoT On ContactT.contactid=EmployeeinfoT.contactid "
 
-            End If
+        End If
 
-            strSQL &= "INNER JOIN userT On contactT.contactid=userT.contactid  where contactT.contactid=" + ddcontacts.SelectedValue + " And companyid=" + company.SelectedValue
-            ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-
-
-            With ds.Tables(0).Rows(0)
-
-                'prefix.Text = .Item("prefix").ToString()
-                lastname.Text = .Item("lastname").ToString()
-                middle.Text = .Item("middleinitial").ToString()
-                firstname.Text = .Item("firstname").ToString()
-                'suffix.Text = .Item("suffix").ToString()
+        strSQL &= "INNER JOIN userT On contactT.contactid=userT.contactid  where contactT.contactid=" + ddcontacts.SelectedValue + " And companyid=" + company.SelectedValue
+        ds = SqlHelper.ExecuteDataset(SqlHelper.SQLConnection, CommandType.Text, strSQL)
 
 
-                jobtitle.Text = .Item("jobtitle").ToString()
-                mobilephone.Text = .Item("mobilephone").ToString()
-                officephone.Text = .Item("officephone").ToString()
-                homephone.Text = .Item("homephone").ToString()
-                personalemail.Text = .Item("personalemail").ToString()
-                workemail.Text = .Item("workemail").ToString()
-                ext.Text = .Item("extension").ToString()
+        With ds.Tables(0).Rows(0)
 
-                username.Text = .Item("username").ToString()
-                password.Text = .Item("password").ToString()
+            'prefix.Text = .Item("prefix").ToString()
+            lastname.Text = .Item("lastname").ToString()
+            middle.Text = .Item("middleinitial").ToString()
+            firstname.Text = .Item("firstname").ToString()
+            'suffix.Text = .Item("suffix").ToString()
+
+
+            jobtitle.Text = .Item("jobtitle").ToString()
+            mobilephone.Text = .Item("mobilephone").ToString()
+            officephone.Text = .Item("officephone").ToString()
+            homephone.Text = .Item("homephone").ToString()
+            personalemail.Text = .Item("personalemail").ToString()
+            workemail.Text = .Item("workemail").ToString()
+            ext.Text = .Item("extension").ToString()
+
+            username.Text = .Item("username").ToString()
+            password.Text = .Item("password").ToString()
             dduserrole.SelectedValue = .Item("securityroleid").ToString()
 
             If ismaincompany.Checked = True Then
-                    employeeaddress.Text = .Item("Address").ToString()
-                    employeeapartmentno.Text = .Item("apartmentnumber").ToString()
-                    employeecity.Text = .Item("city").ToString()
-                    employeestate.SelectedValue = .Item("stateid").ToString()
-                    employeezipcode.Text = .Item("zipcode").ToString()
+                employeeaddress.Text = .Item("Address").ToString()
+                employeeapartmentno.Text = .Item("apartmentnumber").ToString()
+                employeecity.Text = .Item("city").ToString()
+                employeestate.SelectedValue = .Item("stateid").ToString()
+                employeezipcode.Text = .Item("zipcode").ToString()
                 employeecountry.SelectedValue = .Item("countryid")
 
 
                 emerlastname.Text = .Item("emergencycontactlastname").ToString()
-                    emermiddleinitial.Text = .Item("emergencycontactmiddleinitial").ToString()
-                    emerfirstname.Text = .Item("emergencycontactfirstname").ToString()
-                    emerrelationship.Text = .Item("emergencycontactrelationship").ToString()
-                    emerphone.Text = .Item("emergencycontactphonenumber").ToString()
-                    emeremail.Text = .Item("emergencycontactemailaddress").ToString()
+                emermiddleinitial.Text = .Item("emergencycontactmiddleinitial").ToString()
+                emerfirstname.Text = .Item("emergencycontactfirstname").ToString()
+                emerrelationship.Text = .Item("emergencycontactrelationship").ToString()
+                emerphone.Text = .Item("emergencycontactphonenumber").ToString()
+                emeremail.Text = .Item("emergencycontactemailaddress").ToString()
 
-                    emphiredate.Text = .Item("hiredate").ToString()
+                emphiredate.Text = .Item("hiredate").ToString()
 
 
-                    empisactive.Checked = .Item("activeemployee")
-                    empismanager.Checked = .Item("ismanager")
-                    empissalesman.Checked = .Item("issalesman")
-                    empworkfulltime.Checked = .Item("isfulltime")
+                empisactive.Checked = .Item("activeemployee")
+                empismanager.Checked = .Item("ismanager")
+                empissalesman.Checked = .Item("issalesman")
+                empworkfulltime.Checked = .Item("isfulltime")
                 empworkshift.SelectedValue = .Item("workshiftid")
                 empdepartment.SelectedValue = .Item("departmentid")
                 emppaytype.SelectedValue = .Item("employeepaytypeid")
                 hourlyrate.Text = .Item("hourlypayrate").ToString()
-                End If
+            End If
 
 
             ' password.Text = .Item("password").ToString()
