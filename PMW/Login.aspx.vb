@@ -46,9 +46,9 @@ Public Class login
         Dim strSQL As String
         Dim customerContactID As Long = 0
         Dim employeeEmail As String = ""
-        Dim userid As Long = 0
-
-
+        Dim userid
+        Dim contactid As Long = 0
+        Dim macid
         strUserName = txtUserName.Text
         strPassword = txtPassword.Text
 
@@ -59,11 +59,23 @@ Public Class login
 
 
         ' Find User...
+        'find contact
+        'find macaddress
 
 
-        strSQL = "SELECT userid FROM userT WHERE username = '" + strUserName + "' AND password = '" + strPassword + "' AND macaddress='" + nics(1).ToString + "'"
-        userid = SqlHelper.ExecuteScalar(SqlHelper.SQLConnection, CommandType.Text, strSQL)
-        If userid < 0 Then
+
+        strSQL = "SELECT userid FROM userT WHERE username = '" + strUserName + "' AND password = '" + strPassword + "'"
+        contactid = SqlHelper.ExecuteScalar(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+
+
+
+        strSQL = "SELECT macaddress FROM deviceT WHERE contactid = " + contactid '+ " AND macaddress='" + nics(1).ToString + "'"
+        macid = SqlHelper.ExecuteScalar(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+
+
+
+
+        If macid < 0 Then
             lblMessage.Text = "Invalid login information."
         Else
             Session("LoggedInUserID") = userid
