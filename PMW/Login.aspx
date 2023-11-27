@@ -28,8 +28,9 @@
 									
                                     <li id="psw-field">
                                         
-                                        <asp:TextBox ID="txtPassword" runat="server" CssClass="textbox" TextMode="Password" Placeholder="Password"></asp:TextBox>
-                                        
+                                        <asp:TextBox ID="txtPassword" runat="server" CssClass="textbox" TextMode="Password" Placeholder="Password"></asp:TextBox><br />
+                                     <li>                              <asp:textbox ID="txtCaptcha" CssClass="textbox" runat="server"></asp:textbox>
+                                <botdetect:WebFormsCaptcha ID="captchaBox" runat="server"></botdetect:WebFormsCaptcha>
                                         
                                     </li><asp:Panel ID="Panel1" runat="server" DefaultButton="cmdLogin">
                                       <label class="container">
@@ -46,6 +47,7 @@
 							    <p class="login_sub" style="text-align:center;">Can't login? <a href="mailto:support@pmwus.com" />Contact support</a></p>
                            
                                      </form>
+                               
             </ContentTemplate>
         </asp:UpdatePanel>
         </asp:Panel>

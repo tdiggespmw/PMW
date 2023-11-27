@@ -41,47 +41,80 @@ Public Class login
 
     Private Sub cmdLogin_Click(sender As Object, e As System.EventArgs) Handles cmdLogin.Click
         ' LOGIN PROCESS...
+        Dim dr As SqlDataReader
+        Dim dr2 As SqlDataReader
+        Dim dr3 As SqlDataReader
         Dim strUserName As String
         Dim strPassword As String
         Dim strSQL As String
+
+
         Dim customerContactID As Long = 0
         Dim employeeEmail As String = ""
-        Dim userid
-        Dim contactid As Long = 0
+
         Dim macid
         strUserName = txtUserName.Text
         strPassword = txtPassword.Text
-
-        Session.Clear()
-        Dim nics() As NetworkInterface = NetworkInterface.GetAllNetworkInterfaces()
-
-        nics(1).ToString()
+        Dim isHuman As Boolean = captchaBox.Validate(txtCaptcha.Text)
+        txtCaptcha.Text = Nothing
 
 
-        ' Find User...
-        'find contact
-        'find macaddress
+        If isHuman Then
 
 
+            Session.Clear()
+            Dim nics() As NetworkInterface = NetworkInterface.GetAllNetworkInterfaces()
 
-        strSQL = "SELECT userid FROM userT WHERE username = '" + strUserName + "' AND password = '" + strPassword + "'"
-        contactid = SqlHelper.ExecuteScalar(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            'nics(1).ToString()
 
-
-
-        strSQL = "SELECT macaddress FROM deviceT WHERE contactid = " + contactid '+ " AND macaddress='" + nics(1).ToString + "'"
-        macid = SqlHelper.ExecuteScalar(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+            Response.Write(nics(1).Id.ToString())
+            'Response.End()
+            ' Find User...
+            'find contact
+            'find macaddress
 
 
 
 
-        If macid < 0 Then
-            lblMessage.Text = "Invalid login information."
+            strSQL = "SELECT contactid,securityroleid,userid FROM userT WHERE username = '" + strUserName + "' AND password = '" + strPassword + "'"
+            dr = SqlHelper.ExecuteReader(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+
+            dr.Read()
+            If dr("contactid").ToString <= 0 Then
+                lblMessage.Text = "Invalid Login." '"Your MAC Address:" + nics(1).Id.ToString + " is not activated in our system."
+            Else
+
+                strSQL = "SELECT employeeid FROM EmployeeinfoT WHERE contactid = " + dr("contactid").ToString()
+                dr2 = SqlHelper.ExecuteReader(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+
+                dr2.Read()
+
+                strSQL = "SELECT firstname,lastname,companyid FROM contactT WHERE contactid = " + dr("contactid").ToString()
+                dr3 = SqlHelper.ExecuteReader(SqlHelper.SQLConnection, CommandType.Text, strSQL)
+
+                dr3.Read()
+
+
+                Session("LoggedInContactID") = dr("contactid")
+                Session("LoggedInSecurityRoleID") = dr("securityroleid")
+                Session("LoggedInUserID") = dr("userid")
+                Session("LoggedInFullName") = dr3("firstname").ToString() + " " + dr3("lastname").ToString()
+                Session("companyid") = dr3("companyid")
+                Session("employeeid") = dr2("employeeid")
+                Session("validUser") = True
+                Response.Redirect("webform2.aspx")
+            End If
+
+
+
+            'macid = dr("macaddress").ToString()
+
+
+
         Else
-            Session("LoggedInUserID") = userid
-            Session("validUser") = True
-            Response.Redirect("webform2.aspx")
+                lblMessage.Text = "Your not human."
         End If
+
     End Sub
 
 

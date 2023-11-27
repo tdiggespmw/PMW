@@ -29,6 +29,11 @@ Public Class WebForm2
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        If Session("validUser") Is Nothing Or Session("validUser") = False Then
+            Response.Redirect("Login.aspx")
+        End If
+
+
         If Not IsPostBack Then
 
             Tab1.CssClass = "Clicked"
@@ -64,12 +69,12 @@ Public Class WebForm2
                 company.DataBind()
             End If
             Dim newItem3 As New ListItem
-            newItem3.Text = "--SelectC--"
+            newItem3.Text = "--Select--"
             newItem3.Value = "0"
             company.Items.Insert(0, newItem3)
 
             Dim newItem33 As New ListItem
-            newItem33.Text = "--SelectB--"
+            newItem33.Text = "--Select--"
             newItem33.Value = "0"
             branch.Items.Insert(0, newItem33)
 

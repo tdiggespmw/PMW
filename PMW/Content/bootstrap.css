@@ -2348,6 +2348,7 @@ pre code {
 }
 table {
   background-color: transparent;
+	margin-top: 34px;
 }
 table col[class*="col-"] {
   position: static;
@@ -2599,7 +2600,7 @@ legend {
   margin-bottom: 20px;
   font-size: 21px;
   line-height: inherit;
-  color: #333333;
+  color: #777777;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
